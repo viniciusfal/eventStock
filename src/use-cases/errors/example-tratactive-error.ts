@@ -1,4 +1,4 @@
-export class useralreadyexists extends Error {
+export class ProductIsNotFound extends Error {
   constructor() {
     super('Email already Exists')
   }

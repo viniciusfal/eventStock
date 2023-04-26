@@ -6,11 +6,11 @@ interface createProductUseCaseRequest {
 }
 
 export class CreateProductUseCase {
-  constructor(private prismaProductRepository: IProductsRepository) {}
+  constructor(private productRepository: IProductsRepository) {}
 
   async execute({ name, quantity }: createProductUseCaseRequest) {
-    const product = await this.prismaProductRepository.create({
-      name,
+    const product = await this.productRepository.create({
+      name: name.toLowerCase(),
       quantity,
     })
 
