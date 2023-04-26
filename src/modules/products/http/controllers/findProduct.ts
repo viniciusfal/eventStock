@@ -1,7 +1,7 @@
-import { PrismaProductRepository } from '@/repositories/prisma-products-repository'
-import { ProductIsNotFound } from '@/use-cases/errors/example-tratactive-error'
+import { PrismaProductRepository } from '@/modules/products/repositories/prisma-products-repository'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
+import { ProductIsNotFound } from '../../use-cases/errors/Product-is-not-a-found-error'
 
 export async function findProductController(
   request: FastifyRequest,

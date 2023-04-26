@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { CreateProductUseCase } from '@/use-cases/CreateProduct'
-import { PrismaProductRepository } from '@/repositories/prisma-products-repository'
+import { CreateProductUseCase } from '@/modules/products/use-cases/CreateProduct'
+import { PrismaProductRepository } from '@/modules/products/repositories/prisma-products-repository'
 
 export async function createProduct(
   request: FastifyRequest,

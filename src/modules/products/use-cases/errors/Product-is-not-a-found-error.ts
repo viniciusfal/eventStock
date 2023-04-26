@@ -1,5 +1,5 @@
 export class ProductIsNotFound extends Error {
   constructor() {
-    super('Email already Exists')
+    super('Product Is Not a found')
   }
 }

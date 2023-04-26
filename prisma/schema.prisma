@@ -14,3 +14,7 @@ model Product {
 
   @@map("product")
 }
+
+model User {
+  id string @id @default(cuuid())
+}

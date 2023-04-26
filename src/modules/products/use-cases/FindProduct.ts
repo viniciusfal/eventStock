@@ -1,4 +1,4 @@
-import { IProductsRepository } from '@/repositories/Iproducts-repository'
+import { IProductsRepository } from '@/modules/products/repositories/Iproducts-repository'
 import { ProductIsNotFound } from './errors/example-tratactive-error'
 
 export class FindProductUseCase {

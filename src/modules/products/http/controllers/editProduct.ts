@@ -1,5 +1,5 @@
-import { PrismaProductRepository } from '@/repositories/prisma-products-repository'
-import { EditProduct } from '@/use-cases/EditProduct'
+import { PrismaProductRepository } from '@/modules/products/repositories/prisma-products-repository'
+import { EditProduct } from '@/modules/products/use-cases/EditProduct'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
