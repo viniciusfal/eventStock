@@ -1,7 +1,6 @@
-import { PrismaProductRepository } from '@/modules/products/repositories/prisma-products-repository'
-import { EditProduct } from '@/modules/products/use-cases/EditProduct'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
+import { makeEditProduct } from '../../use-cases/factories/make-edit-product'
 
 export async function editProduct(
   request: FastifyRequest,
@@ -19,8 +18,7 @@ export async function editProduct(
   const { id } = registerParams.parse(request.params)
 
   try {
-    const productRepository = new PrismaProductRepository()
-    const editProductUseCase = new EditProduct(productRepository)
+    const editProductUseCase = makeEditProduct()
 
     const product = await editProductUseCase.execute({
       id,

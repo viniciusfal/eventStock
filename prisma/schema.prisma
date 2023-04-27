@@ -8,13 +8,20 @@ datasource db {
 }
 
 model Product {
-  id       String @id @default(uuid())
-  name     String
-  quantity Int
+  id         String   @id @default(uuid())
+  name       String
+  quantity   Int
+  created_at DateTime @default(now())
 
   @@map("product")
 }
 
 model User {
-  id string @id @default(cuuid())
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  created_at    DateTime @default(now())
+
+  @@map("user")
 }

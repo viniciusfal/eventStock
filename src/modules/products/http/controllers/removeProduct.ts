@@ -1,8 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
-import { PrismaProductRepository } from '../../repositories/prisma-products-repository'
-import { RemoveProduct } from '../../use-cases/RemoveProduct'
 import { ProductIsNotFound } from '../../use-cases/errors/Product-is-not-a-found-error'
+import { makeRemoveProduct } from '../../use-cases/factories/make-remove-product'
 
 export async function removeProduct(
   request: FastifyRequest,
@@ -15,9 +14,7 @@ export async function removeProduct(
   const { id } = registerParamsSchema.parse(request.params)
 
   try {
-    const productRpository = new PrismaProductRepository()
-
-    const removeProductUseCase = new RemoveProduct(productRpository)
+    const removeProductUseCase = makeRemoveProduct()
 
     await removeProductUseCase.execute(id)
   } catch (err) {

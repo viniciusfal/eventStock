@@ -1,14 +1,14 @@
-import { PrismaProductRepository } from '@/modules/products/repositories/prisma-products-repository'
 import { FastifyRequest, FastifyReply } from 'fastify'
+import { makeListAllProducts } from '../../use-cases/factories/make-list-all-products'
 
 export async function listAllProducts(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
   try {
-    const productRepository = new PrismaProductRepository()
+    const listAllProductsUseCase = makeListAllProducts()
 
-    const products = await productRepository.list()
+    const products = await listAllProductsUseCase.execute()
 
     return products
   } catch (err) {

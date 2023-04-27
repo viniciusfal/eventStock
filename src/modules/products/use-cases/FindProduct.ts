@@ -1,5 +1,5 @@
 import { IProductsRepository } from '@/modules/products/repositories/Iproducts-repository'
-import { ProductIsNotFound } from './errors/example-tratactive-error'
+import { ProductIsNotFound } from './errors/Product-is-not-a-found-error'
 
 export class FindProductUseCase {
   constructor(private productRepository: IProductsRepository) {}

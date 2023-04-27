@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { CreateProductUseCase } from '@/modules/products/use-cases/CreateProduct'
-import { PrismaProductRepository } from '@/modules/products/repositories/prisma-products-repository'
+
+import { makeCreateProduct } from '../../use-cases/factories/make-create-product'
 
 export async function createProduct(
   request: FastifyRequest,
@@ -15,8 +15,7 @@ export async function createProduct(
   const { name, quantity } = registerBodySchema.parse(request.body)
 
   try {
-    const productRpository = new PrismaProductRepository()
-    const createProductUseCase = new CreateProductUseCase(productRpository)
+    const createProductUseCase = makeCreateProduct()
 
     await createProductUseCase.execute({
       name,
