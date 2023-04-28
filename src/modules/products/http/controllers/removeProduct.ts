@@ -8,7 +8,7 @@ export async function removeProduct(
   reply: FastifyReply,
 ) {
   const registerParamsSchema = z.object({
-    id: z.string().uuid(),
+    id: z.string().cuid(),
   })
 
   const { id } = registerParamsSchema.parse(request.params)

@@ -11,7 +11,7 @@ export async function editProduct(
     quantity: z.number(),
   })
   const registerParams = z.object({
-    id: z.string().uuid(),
+    id: z.string().cuid(),
   })
 
   const { name, quantity } = registerBodySchema.parse(request.body)

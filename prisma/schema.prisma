@@ -8,12 +8,14 @@ datasource db {
 }
 
 model Product {
-  id         String   @id @default(uuid())
-  name       String
-  quantity   Int
-  created_at DateTime @default(now())
+  id          String                  @id @default(cuid())
+  name        String                  @unique
+  quantity    Int
+  created_at  DateTime                @default(now())
+  request     RequestsOnProducts[]
+  devolutions devolutionsOnProducts[]
 
-  @@map("product")
+  @@map("products")
 }
 
 model User {
@@ -23,5 +25,72 @@ model User {
   password_hash String
   created_at    DateTime @default(now())
 
-  @@map("user")
+  @@map("users")
+}
+
+model Bar {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  code        String
+  created_at  DateTime     @default(now())
+  devolutions Devolution[]
+  event       Event?       @relation(fields: [event_id], references: [id])
+  event_id    String?
+
+  @@map("bars")
+}
+
+model Request {
+  id       String               @id @default(cuid())
+  status   String
+  products RequestsOnProducts[]
+  event    Event?               @relation(fields: [event_id], references: [id])
+  event_id String?
+
+  @@map("requests")
+}
+
+model Devolution {
+  id         String                  @id @default(cuid())
+  quantity   Int
+  status     String
+  created_at DateTime                @default(now())
+  products   devolutionsOnProducts[]
+  bar        Bar                     @relation(fields: [bar_name], references: [name])
+  bar_name   String
+  event      Event?                  @relation(fields: [event_id], references: [id])
+  event_id   String?
+
+  @@map("devolutions")
+}
+
+model Event {
+  id              String       @id @default(cuid())
+  name            String
+  bars            Bar[]
+  status          String
+  requests        Request[]
+  devolutions     Devolution[]
+  initEventDate   DateTime     @default(now())
+  finishEventDate DateTime
+
+  @@map("events")
+}
+
+model RequestsOnProducts {
+  product      Product? @relation(fields: [product_name], references: [name])
+  product_name String
+  request      Request? @relation(fields: [request_id], references: [id])
+  request_id   String
+
+  @@id([product_name, request_id])
+}
+
+model devolutionsOnProducts {
+  Product       Product?    @relation(fields: [product_name], references: [name])
+  product_name  String
+  Devolution    Devolution? @relation(fields: [devolution_id], references: [id])
+  devolution_id String
+
+  @@id([product_name, devolution_id])
 }

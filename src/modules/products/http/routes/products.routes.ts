@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify'
-import { createProduct } from './controllers/createProduct'
-import { findProductController } from './controllers/findProduct'
-import { listAllProducts } from './controllers/listAllProducts'
-import { editProduct } from './controllers/editProduct'
-import { removeProduct } from './controllers/removeProduct'
+import { createProduct } from '../controllers/createProduct'
+import { findProductController } from '../controllers/findProduct'
+import { listAllProducts } from '../controllers/listAllProducts'
+import { editProduct } from '../controllers/editProduct'
+import { removeProduct } from '../controllers/removeProduct'
 import { verifyJWT } from '@/middleware/verify-jwt'
 
 export async function productRoutes(app: FastifyInstance) {
