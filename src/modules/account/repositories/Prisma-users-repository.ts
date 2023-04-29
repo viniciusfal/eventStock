@@ -4,7 +4,7 @@ import { IUsersRepository } from './IUsers-repository'
 
 export class PrismaUsersRepository implements IUsersRepository {
   async create(data: Prisma.UserCreateInput): Promise<User> {
-    const user = prisma.user.create({
+    const user = await prisma.user.create({
       data,
     })
 
@@ -12,7 +12,7 @@ export class PrismaUsersRepository implements IUsersRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         email,
       },
@@ -21,13 +21,13 @@ export class PrismaUsersRepository implements IUsersRepository {
   }
 
   async list(): Promise<User[]> {
-    const users = prisma.user.findMany()
+    const users = await prisma.user.findMany()
 
     return users
   }
 
   async userUpdate(data: Prisma.UserUpdateInput): Promise<User> {
-    const user = prisma.user.update({
+    const user = await prisma.user.update({
       where: {
         id: data.id?.toString(),
       },

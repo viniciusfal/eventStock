@@ -30,7 +30,7 @@ model User {
 
 model Bar {
   id          String       @id @default(cuid())
-  name        String       @unique
+  name        String
   code        String
   created_at  DateTime     @default(now())
   devolutions Devolution[]
@@ -56,8 +56,8 @@ model Devolution {
   status     String
   created_at DateTime                @default(now())
   products   devolutionsOnProducts[]
-  bar        Bar                     @relation(fields: [bar_name], references: [name])
-  bar_name   String
+  bar        Bar                     @relation(fields: [bar_id], references: [id])
+  bar_id     String
   event      Event?                  @relation(fields: [event_id], references: [id])
   event_id   String?
 
@@ -87,10 +87,10 @@ model RequestsOnProducts {
 }
 
 model devolutionsOnProducts {
-  Product       Product?    @relation(fields: [product_name], references: [name])
-  product_name  String
+  Product       Product?    @relation(fields: [product_id], references: [id])
+  product_id    String
   Devolution    Devolution? @relation(fields: [devolution_id], references: [id])
   devolution_id String
 
-  @@id([product_name, devolution_id])
+  @@id([product_id, devolution_id])
 }
