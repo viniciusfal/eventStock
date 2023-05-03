@@ -69,10 +69,11 @@ model Event {
   name            String
   bars            Bar[]
   status          String
+  active          Boolean      @default(true)
   requests        Request[]
   devolutions     Devolution[]
-  initEventDate   DateTime     @default(now())
-  finishEventDate DateTime
+  initEventDate   DateTime?
+  finishEventDate DateTime?
 
   @@map("events")
 }

@@ -10,10 +10,11 @@ export async function updateBar(request: FastifyRequest, reply: FastifyReply) {
 
   const registerParams = z.object({
     id: z.string().cuid(),
+    event_id: z.string().cuid(),
   })
 
   const { name, code } = registerBodySchema.parse(request.body)
-  const { id } = registerParams.parse(request.params)
+  const { id, event_id } = registerParams.parse(request.params)
 
   try {
     const updateBarUseCase = makeUpdateBar()
@@ -22,6 +23,7 @@ export async function updateBar(request: FastifyRequest, reply: FastifyReply) {
       id,
       name,
       code,
+      event_id,
     })
 
     return bar

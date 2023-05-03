@@ -3,20 +3,28 @@ import { IBarsRepository } from './IBars-repository'
 import { prisma } from '@/lib/prisma'
 
 export class PrismaBarsRepository implements IBarsRepository {
-  async create(data: Prisma.BarCreateInput): Promise<Bar> {
+  async create({ name, code, event }: Prisma.BarCreateInput): Promise<Bar> {
     const bar = await prisma.bar.create({
-      data,
+      data: {
+        name,
+        code,
+        event,
+      },
     })
 
     return bar
   }
 
-  async update(data: Prisma.BarUpdateInput): Promise<Bar> {
+  async update({ id, name, code, event }: Prisma.BarUpdateInput): Promise<Bar> {
     const bar = await prisma.bar.update({
       where: {
-        id: data.id?.toString(),
+        id: id?.toString(),
       },
-      data,
+      data: {
+        name,
+        code,
+        event,
+      },
     })
 
     return bar
@@ -31,17 +39,22 @@ export class PrismaBarsRepository implements IBarsRepository {
     return bar
   }
 
-  async list(): Promise<Bar[]> {
-    const bar = await prisma.bar.findMany()
+  async list({ event }: Prisma.BarWhereInput): Promise<Bar[]> {
+    const bar = await prisma.bar.findMany({
+      where: {
+        event,
+      },
+    })
 
     return bar
   }
 
-  async remove(id: string): Promise<void> {
+  async remove({ id }: Prisma.BarWhereUniqueInput): Promise<void> {
     await prisma.bar.delete({
       where: {
-        id,
+        id: id?.toString(),
       },
+      include: { event: true },
     })
   }
 }

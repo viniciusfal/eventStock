@@ -8,12 +8,18 @@ export async function createBar(request: FastifyRequest, reply: FastifyReply) {
     code: z.string().min(4).max(8),
   })
 
+  const registerParamsSchema = z.object({
+    event_id: z.string().cuid(),
+  })
+
   const { name, code } = createBarBodySchema.parse(request.body)
+  const { event_id } = registerParamsSchema.parse(request.params)
 
   try {
     const createBarUSeCase = makeCreateBar()
 
     await createBarUSeCase.execute({
+      event_id,
       name,
       code,
     })

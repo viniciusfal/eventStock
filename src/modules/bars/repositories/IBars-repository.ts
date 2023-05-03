@@ -4,6 +4,6 @@ export interface IBarsRepository {
   create(data: Prisma.BarCreateInput): Promise<Bar>
   update(data: Prisma.BarUpdateInput): Promise<Bar>
   findById(name: string): Promise<Bar | null>
-  list(): Promise<Bar[]>
-  remove(id: string): Promise<void>
+  list({ event }: Prisma.BarWhereInput): Promise<Bar[]>
+  remove({ id }: Prisma.BarWhereUniqueInput): Promise<void>
 }

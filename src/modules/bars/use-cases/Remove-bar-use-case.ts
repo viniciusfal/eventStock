@@ -10,6 +10,6 @@ export class RemoveBarUseCase {
     if (!barId) {
       throw new BarIsNotAFound()
     }
-    return await this.barsRepository.remove(id)
+    return await this.barsRepository.remove({ id })
   }
 }
