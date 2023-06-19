@@ -8,12 +8,12 @@ datasource db {
 }
 
 model Product {
-  id          String                  @id @default(cuid())
-  name        String                  @unique
-  quantity    Int
-  created_at  DateTime                @default(now())
-  request     RequestsOnProducts[]
-  devolutions devolutionsOnProducts[]
+  id                 String                  @id @default(cuid())
+  name               String                  @unique
+  quantity           Int
+  created_at         DateTime                @default(now())
+  devolutions        devolutionsOnProducts[]
+  RequestsOnProducts RequestsOnProducts[]
 
   @@map("products")
 }
@@ -34,6 +34,7 @@ model Bar {
   code        String
   created_at  DateTime     @default(now())
   devolutions Devolution[]
+  request     Request[]
   event       Event?       @relation(fields: [event_id], references: [id])
   event_id    String?
 
@@ -41,11 +42,13 @@ model Bar {
 }
 
 model Request {
-  id       String               @id @default(cuid())
-  status   String
-  products RequestsOnProducts[]
-  event    Event?               @relation(fields: [event_id], references: [id])
-  event_id String?
+  id                 String               @id @default(cuid())
+  status             String
+  event              Event?               @relation(fields: [event_id], references: [id])
+  event_id           String?
+  bar                Bar?                 @relation(fields: [bar_id], references: [id])
+  bar_id             String?
+  RequestsOnProducts RequestsOnProducts[]
 
   @@map("requests")
 }
@@ -79,12 +82,12 @@ model Event {
 }
 
 model RequestsOnProducts {
-  product      Product? @relation(fields: [product_name], references: [name])
-  product_name String
-  request      Request? @relation(fields: [request_id], references: [id])
-  request_id   String
+  product    Product? @relation(fields: [product_id], references: [id])
+  product_id String
+  request    Request? @relation(fields: [request_id], references: [id])
+  request_id String
 
-  @@id([product_name, request_id])
+  @@id([product_id, request_id])
 }
 
 model devolutionsOnProducts {

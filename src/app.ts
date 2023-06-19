@@ -7,6 +7,7 @@ import fastifyJwt from '@fastify/jwt'
 import { env } from './env'
 import { barRoutes } from './modules/bars/http/routes/bars.routes'
 import { eventRoutes } from './modules/event/http/routes/event.routes'
+import { requestRoutes } from './modules/requests/http/routes/request.routes'
 
 export const app = fastify()
 
@@ -18,5 +19,6 @@ app.register(productRoutes)
 app.register(usersRoutes)
 app.register(barRoutes)
 app.register(eventRoutes)
+app.register(requestRoutes)
 
 appError()
