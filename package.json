@@ -8,6 +8,9 @@
     "start": "node build/server.js",
     "build": "tsup src --out-dir build"
   },
+  "engines": {
+    "node": "18.15.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
